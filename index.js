@@ -2,52 +2,61 @@ let inventory;
 let heroName;
 let weapon;
 
-function welcome() {
-  alert('Willkommen zu "Das Geheimnis der Verlorenen Ruinen"!');
-  startGame();
+function checkSelection() {
+  const selectedOption = document.querySelector('input[name="option"]:checked');
+  if (selectedOption) {
+    return selectedOption.value;
+  } else {
+    alert("Bitte eine Option auswählen!");
+  }
 }
 
 function startGame() {
+  const content = document.getElementById("content");
+  content.innerHTML =
+    "<p>Wie Lautet dein Name?</p><br><input id='nameInput' placeholder='Namen eingeben...'><br><br><button onclick='chooseWeapon()'>Weiter</button>";
   inventory = [];
-  heroName = prompt("Wie heißt dein Held?");
-  weapon = chooseWeapon();
-  choosePath();
 }
 
 function chooseWeapon() {
-  weapon = null;
+  const nameInput = document.getElementById("nameInput");
+  const header = document.getElementById("header");
+  const content = document.getElementById("content");
 
-  while (weapon === null) {
-    const choice = prompt(
-      "Wähle deine Waffe:\n1) Schwert\n2) Bogen\n3) Feuerstab\n(Wähle 1, 2 oder 3)"
-    );
-
-    if (choice === "1") {
-      weapon = "Schwert";
-    } else if (choice === "2") {
-      weapon = "Bogen";
-    } else if (choice === "3") {
-      weapon = "Feuerstab";
-    } else {
-      alert("Ungültige Eingabe. Bitte wähle 1, 2 oder 3");
-    }
+  if (nameInput.value) {
+    heroName = nameInput.value;
+    header.innerHTML = `<p>Name: ${heroName}`;
+    content.innerHTML =
+      "<form><p>Wähle eine Waffe:</p><label><input type='radio' name='option' value='Schwert'>Schwert</label><br><label><input type='radio' name='option' value='Bogen'>Bogen</label><br><label><input type='radio' name='option' value='Feuerstab'>Feuerstab</label><br><br><button onclick='checkWeapon()' type='button'>Weiter</button></form>";
+  } else {
+    alert("Du hast keinen Namen eingegeben!");
   }
-  alert(`${heroName} hat die Waffe ${weapon} gewählt.`);
-  return weapon;
+}
+
+function checkWeapon() {
+  weapon = checkSelection();
+  const header = document.getElementById("header");
+  if (weapon) {
+    const newElement = document.createElement("p");
+    newElement.textContent = `Waffe: ${weapon}`;
+    header.appendChild(newElement);
+    choosePath();
+  }
 }
 
 function choosePath() {
-  const choice = prompt(
-    "Du stehst vor dem dichten Dschungel. Zwei Wege führen hinein:\n1) Der Flussweg\n2) Der Waldpfad\n(Wähle 1 oder 2)"
-  );
+  const content = document.getElementById("content");
+  content.innerHTML =
+    "<form><p>Du stehst vor dem dichten Dschungel. Zwei Wege führen hinein:</p><label><input type='radio' name='option' value='Fluss'>Der Flussweg</label><br><label><input type='radio' name='option' value='Wald'>Der Waldpfad</label><br><p>Welchen Weg nimmst du?</p><br><br><button onclick='checkPath()' type='button'>Weiter</button></form>";
+}
 
-  if (choice === "1") {
+function checkPath() {
+  const chosenOption = checkSelection();
+
+  if (chosenOption === "Fluss") {
     riverPath();
-  } else if (choice === "2") {
+  } else if (chosenOption === "Wald") {
     forestPath();
-  } else {
-    alert("Ungültige Eingabe. Bitte wähle 1 oder 2");
-    choosePath();
   }
 }
 

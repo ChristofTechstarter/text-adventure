@@ -1,0 +1,37 @@
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url('images/dschungelruinie.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: min-content min-content;
+    gap: 20px;
+  }
+  
+
+  header {
+    text-align: center;
+    grid-column: 1 / -1;
+    color: red;
+    background-color: wheat;
+    border-radius: 8px;
+    grid-column: 2 / 3;
+    display: table-column;
+    justify-content: center;
+    border: 2px solid black;
+  }
+
+  #content {
+    text-align: center;
+    color: red;
+    background-color: wheat;
+    border-radius: 8px;
+    grid-column: 2 / 3;
+    display: table-column;
+    justify-content: center;
+    border: 2px solid black;
+  }
