@@ -25,7 +25,7 @@ function chooseWeapon() {
 
   if (nameInput.value) {
     heroName = nameInput.value;
-    header.innerHTML = `<p>Name: ${heroName}`;
+    header.innerHTML = `<p>Name: ${heroName}</p>`;
     content.innerHTML =
       "<form><p>Wähle eine Waffe:</p><label><input type='radio' name='option' value='Schwert'>Schwert</label><br><label><input type='radio' name='option' value='Bogen'>Bogen</label><br><label><input type='radio' name='option' value='Feuerstab'>Feuerstab</label><br><br><button onclick='checkWeapon()' type='button'>Weiter</button></form>";
   } else {
